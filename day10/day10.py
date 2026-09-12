@@ -91,18 +91,23 @@ class ContactBook:
 
 
 # ⑤ 跑一遍：和 manager 菜单里 1/2/3/4/5 干的事一样，只是换成了"对象.方法"
-if os.path.exists(PATH):   # 保证演示每次从空开始，可重复运行
-    os.remove(PATH)
+def main():
+    if os.path.exists(PATH):   # 保证演示每次从空开始，可重复运行
+        os.remove(PATH)
 
-book = ContactBook()
-print(f"载入 {len(book.contacts)} 位联系人")
-book.add("光羽", "18486311094")
-book.add("小明", "13800001111")
-print("查光羽：", book.find("光羽"))
-book.update("小明", "13900002222")
-book.delete("光羽")
-print("--- 全部 ---")
-book.show_all()
+    book = ContactBook()
+    print(f"载入 {len(book.contacts)} 位联系人")
+    book.add("光羽", "18486311094")
+    book.add("小明", "13800001111")
+    print("查光羽：", book.find("光羽"))
+    book.update("小明", "13900002222")
+    book.delete("光羽")
+    print("--- 全部 ---")
+    book.show_all()
+
+
+if __name__ == "__main__":
+    main()
 
 print("=" * 30)
 # ⑥ 一句话总结：类 = 数据 + 操作打包带走。

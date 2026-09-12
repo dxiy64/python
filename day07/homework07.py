@@ -1,50 +1,59 @@
 # -*- coding: utf-8 -*-
 # ============================================
 # homework07.py · 通讯录存档版（JSON）
+# 运行方法：cd day07 再 python homework07.py
+# 本课只学：json.dump / load + try 读档
 # ============================================
+
 import json
 
-# TODO 1: 程序启动时尝试读 contacts.json，
-#   有就 load 进 contacts，没有（FileNotFoundError）就用空字典 {}
-# try:
-#     with open(???, "r", encoding="utf-8") as f:
-#         contacts = json.load(f)
-# except FileNotFoundError:
-#     contacts = ???
-try:
-    with open("contacts.json", "r", encoding="utf-8") as f:
-        contacts = json.load(f)
-except FileNotFoundError:
-    contacts = {"光羽": "18486311094", "小明": "13800001111"}
-
-# TODO 4: 启动时打印上次共有几位（放这里：load 刚结束、新人还没加）
-print(f"上次共有 {len(contacts)} 位联系人")
+CONTACTS_FILE = "contacts.json"
 
 
-# TODO 2: 让用户输入名字和电话，存进 contacts，
-#   然后 dump 回 contacts.json（"w" 模式，ensure_ascii=False）
-name = input("请输入联系人姓名：")
-phone = input("请输入联系人电话：")
-contacts[name] = phone
-with open("contacts.json", "w", encoding="utf-8") as f:
-    json.dump(contacts, f, ensure_ascii=False, indent=2)
+def load_contacts():
+    """启动读档：有文件就装进来，没有就从空字典开始"""
+    try:
+        with open(CONTACTS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
 
-# TODO 3: 用 find_phone 的思路（Day4）查一个人并打印
-while True:
-    find_name = input("要查谁？（输入 q 退出）：")
-    if find_name == "q":
-        print("已退出查询，再见！")
-        break
-    if find_name in contacts:
-        print(f"{find_name} 查询结果：{contacts[find_name]}")
-    else:
-        print(f"{find_name} 查询结果：查无此人")
 
+def save_contacts(contacts):
+    """改完立刻存盘：字典 → 文件里的文字"""
+    with open(CONTACTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(contacts, f, ensure_ascii=False, indent=2)
+
+
+def find_phone(contacts, name):
+    """查电话：沿用 Day04 的思路，查不到返回“查无此人”"""
+    if name in contacts:
+        return contacts[name]
+    return "查无此人"
+
+
+def main():
+    contacts = load_contacts()
+    print(f"上次共有 {len(contacts)} 位联系人")
+
+    name = input("请输入联系人姓名：").strip()
+    phone = input("请输入联系人电话：").strip()
+    contacts[name] = phone
+    save_contacts(contacts)
+
+    while True:
+        keyword = input("要查谁？（输入 q 退出）：").strip()
+        if keyword == "q":
+            print("已退出查询，再见！")
+            break
+        print(f"{keyword} 查询结果：{find_phone(contacts, keyword)}")
+
+
+if __name__ == "__main__":
+    main()
 
 # 笔记
-# 1. json.dump() 将字典写入文件，json.load() 从文件读取字典
-# 2. datetime的作用是获取当前日期和时间，random的作用是生成随机数
-# 3. try-except语句用于处理可能出现的异常情况，例如文件不存在时，程序不会崩溃，而是执行except块中的代码
-# 4. len() 函数用于获取字典中键值对的数量
-# 5. import语句用于导入模块，模块是别人写好的工具箱，也可以自己写模块，模块可以包含函数、类和变量等
-#
+# 1. json.dump(字典, 文件)：倒出去存盘；json.load(文件)：装进来变回字典
+# 2. ensure_ascii=False：中文直接存中文，不变成 \u 转义
+# 3. try/except FileNotFoundError：第一次运行没文件也不崩
+# 4. JSON 读回来直接是字典；纯文本读回来是字符串，还得自己切

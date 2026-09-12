@@ -79,4 +79,5 @@ def main():
             print("只能选 1/2/3/4/5/q，重选！")
 
 
-main()
+if __name__ == "__main__":
+    main()
