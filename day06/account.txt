@@ -1,0 +1,2 @@
+苹果手机 -v50元
+python -u "c:\Users\Administrator\PythonLearning\day06\homework06.py" -python -u "c:\Users\Administrator\PythonLearning\day06\homework06.py"元
