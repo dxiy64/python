@@ -1,6 +1,6 @@
 # Python 学习记录 🐍
 
-从零开始的 Python 学习，每天一个主题 + 一份作业，已学完 Day 01–09。
+从零开始的 Python 学习，每天一个主题 + 一份作业，已学完 Day 01–10。
 
 ## 运行方法
 
@@ -24,6 +24,7 @@ cd day01 && python day01.py
 | Day 07 | 模块与 JSON：datetime / random、json.dump / load 结构化存档 | `day07/day07.py` | `day07/homework07.py` — 通讯录存档版（`contacts.json`） |
 | Day 08 | 联网小程序：requests + wttr.in 天气查询，写日志 | `day08/day08.py` | `day08/homework08.py` — 天气小管家（`weather_log.txt`） |
 | Day 09 | 毕业项目：通讯录管理系统（while 菜单 + 字典 + 函数 + JSON + try） | `day09/manager.py` | `day09/homework09.py` — 读懂 manager.py：save 调用点、del、strip，加"统计"与电话数字校验 |
+| Day 10 | 面向对象：class / 对象 / `__init__` / self / 方法，把通讯录装进 `ContactBook` 类 | `day10/day10.py` | `day10/homework10.py` — 加 `count` 统计、电话数字校验、选做模糊搜索 |
 
 ## 目录结构
 
