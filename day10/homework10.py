@@ -31,6 +31,9 @@ class ContactBook:
         # TODO 2（必做）: 在这里加电话校验——如果 phone 不是全数字，
         #   打印"电话只能是数字！"并 return（不存盘）。
         #   提示：字符串有个 .isdigit() 方法（homework09 TODO 3 的老朋友）。
+        if not phone.isdigit():
+            print("电话只能是数字！")
+            return
         self.contacts[name] = phone
         self.save()
         print(f"已加上 {name}")
@@ -38,7 +41,8 @@ class ContactBook:
     def count(self):
         # TODO 1（必做）: 返回共有几位联系人。
         #   现在 return 0 是占位的，改成对的那一行（提示：len，Day3 老朋友）。
-        return 0
+        return len(self.contacts)
+
 
     def find(self, name):
         if name in self.contacts:
@@ -48,6 +52,16 @@ class ContactBook:
     # TODO 3（进阶选做）: 加一个 search(keyword) 方法，模糊查找——
     #   把名字里包含 keyword 的联系人全部打印出来。
     #   提示：for name, phone in self.contacts.items(): + if keyword in name
+    def search(self, keyword):
+        found = False
+        for name, phone in self.contacts.items():
+            if keyword in name:
+                print(f"{name} {phone}")
+                found = True
+        if not found:
+            print("查无此人")
+
+
 
 
 if __name__ == "__main__":
@@ -60,4 +74,7 @@ if __name__ == "__main__":
     print(f"共有 {book.count()} 位联系人")
     print("查小明：", book.find("小明"))
     # TODO 3 做完后，取消下面这行的注释验证：
-    # book.search("光")
+    book.search("光")
+
+
+
