@@ -1,6 +1,6 @@
 # Python 学习记录 🐍
 
-从零开始的 Python 学习，每天一个主题 + 一份作业，已学完 Day 01–10。
+从零开始的 Python 学习，每天一个主题 + 一份作业，已学完 Day 01–12。
 
 ## 运行方法
 
@@ -25,6 +25,8 @@ cd day01 && python day01.py
 | Day 08 | 联网小程序：requests + wttr.in 天气查询，写日志 | `day08/day08.py` | `day08/homework08.py` — 天气小管家（`weather_log.txt`） |
 | Day 09 | 毕业项目：通讯录管理系统（while 菜单 + 字典 + 函数 + JSON + try） | `day09/manager.py` | `day09/homework09.py` — 读懂 manager.py：save 调用点、del、strip，加"统计"与电话数字校验 |
 | Day 10 | 面向对象：class / 对象 / `__init__` / self / 方法，把通讯录装进 `ContactBook` 类 | `day10/day10.py` | `day10/homework10.py` — 加 `count` 统计、电话数字校验、选做模糊搜索 |
+| Day 11 | 面向对象②：`__str__` 长相 / `__len__` 人数 / update 改电话 / rename 搬家（键不能改名） | `day11/day11.py` | `day11/homework11.py` — 长相、改电话校验、选做改名搬家 |
+| Day 12 | 毕业项目②：菜单版通讯录（类 + while 菜单 + main，不再递 contacts） | `day12/day12.py` | `day12/homework12.py` — 补模糊搜分支、空名校验、选做看人数 |
 
 ## 目录结构
 

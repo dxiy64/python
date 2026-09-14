@@ -43,7 +43,6 @@ class ContactBook:
         #   现在 return 0 是占位的，改成对的那一行（提示：len，Day3 老朋友）。
         return len(self.contacts)
 
-
     def find(self, name):
         if name in self.contacts:
             return self.contacts[name]
@@ -62,14 +61,12 @@ class ContactBook:
             print("查无此人")
 
 
-
-
 if __name__ == "__main__":
     if os.path.exists(PATH):
         os.remove(PATH)
     book = ContactBook()
     book.add("光羽", "18486311094")
-    book.add("小明", "abc")          # TODO 2 做完后，这一行应该被拒绝、不存盘
+    book.add("小明", "abc")  # TODO 2 做完后，这一行应该被拒绝、不存盘
     # TODO 1 做完后，下一行应该打印出正确的数字：
     print(f"共有 {book.count()} 位联系人")
     print("查小明：", book.find("小明"))
@@ -77,4 +74,11 @@ if __name__ == "__main__":
     book.search("光")
 
 
-
+# 笔记
+# 1. json.dump() 保存文件时，ensure_ascii=False 可以让中文字符正常保存。
+# 2. json.dump() 保存文件时，indent=2 可以让文件更易读。他的意思是缩进 2 个空格。
+# 3. os.path.abspath(__file__) 获取当前文件的绝对路径。
+# 4. os.path.dirname(path) 获取 path 的目录名。
+# 5. class 的作用是定义一个类，类可以包含多个方法。写法是 class 类名:，方法写法是 def 方法名(self, 参数1, 参数2):。
+# 6. self 是一个特殊的参数，表示当前对象。在类的方法中，self 必须是第一个参数。
+# 7. 模糊查找的关键字是 in，比如 "光" in "光羽" 返回 True，"光" in "小明" 返回 False。
