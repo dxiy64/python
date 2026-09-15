@@ -1,18 +1,34 @@
 # Python 学习记录 🐍
 
-从零开始的 Python 学习，每天一个主题 + 一份作业。目标：能自己动手做项目。
+从零开始的 Python 学习，每天一个主题 + 一份作业。
+**目标：找到 Python 相关工作（90 天计划）**
 
-![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-Day%2014%20%2F%2030-brightgreen)
-![天数](https://img.shields.io/badge/%E5%B7%B2%E5%AD%A6%E4%B9%A0-14%20%E5%A4%A9-blue)
-![作业](https://img.shields.io/badge/%E4%BD%9C%E4%B8%9A-14%20%E4%BB%BD-success)
+![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-14%20%2F%2090%20%E5%A4%A9%20(16%25)-orange)
+![当前阶段](https://img.shields.io/badge/%E9%98%B6%E6%AE%B5%E2%91%A0-%E5%9F%BA%E7%A1%80%E6%94%B6%E5%B0%BE%20Day%2015--20-informational)
+![目标](https://img.shields.io/badge/%E7%9B%AE%E6%A0%87-Python%20%E5%B7%A5%E4%BD%9C-blueviolet)
 
 ## 学习进度
 
-**已完成 14 / 30 天（47%）**
+**已完成 14 / 90 天（16%）**　🟩 已完成　🟨 进行中　⬜ 未开始
 
 ```
-Day 01 ├██████████████░░░░░░░░░░░░░░░░┤ 30
+Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
+Day 31–60  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
+Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 ```
+
+### 阶段进度
+
+| 阶段 | 天数 | 状态 |
+| --- | --- | --- |
+| ① 基础收尾（包 / 依赖 / 标准库 / 正则 / 调试） | Day 15–20 | ⬜ 未开始 |
+| ② 从零做项目（sqlite / 爬虫 / 2 个作品） | Day 21–35 | ⬜ 未开始 |
+| ③ 求职核心技能（Git / Linux / HTTP / Web 或数据 / 测试） | Day 36–60 | ⬜ 未开始 |
+| ④ 作品与求职（3 个作品 / 简历 / 面试） | Day 61–90 | ⬜ 未开始 |
+
+> 完整计划见 **[ROADMAP.md](ROADMAP.md)**
+
+## 每日记录
 
 | 状态 | 天数 | 主题 | 课堂代码 | 作业 |
 | ---- | ---- | ---- | -------- | ---- |
@@ -30,6 +46,12 @@ Day 01 ├██████████████░░░░░░░░░�
 | ✅ | Day 12 | 毕业项目②：菜单版通讯录（类 + while 菜单 + main，不再递 contacts） | `day12/day12.py` | `day12/homework12.py` — 补模糊搜分支、空名校验、选做看人数 |
 | ✅ | Day 13 | 面向对象③：继承 / 父类子类 / `super().__init__` / 方法覆盖 / 多态 / isinstance | `day13/day13.py` | `day13/homework13.py` — 联系人分类：Friend 加备注、Workmate 加公司、多态显示 |
 | 🚧 | Day 14 | 拆文件：工具箱（类）+ 入口（菜单）、`import` 三种写法、`__pycache__` 与闸门 | `day14/day14.py`（搭档 `contactbook.py` + `main.py`） | `day14/homework14.md` — 把 `day14/big.py` 拆成 `hw_contactbook.py` + `hw_main.py` |
+| ⬜ | Day 15 | 模块与包：`__init__.py`、包结构、相对导入 | — | — |
+| ⬜ | Day 16 | 虚拟环境与依赖：`venv` / `pip` / `requirements.txt` | — | — |
+| ⬜ | Day 17 | 标准库：`pathlib` / `csv` / `datetime` / `collections` | — | — |
+| ⬜ | Day 18 | 正则表达式 `re` | — | — |
+| ⬜ | Day 19 | 调试：读 traceback / 断点 / `logging` | — | — |
+| ⬜ | Day 20 | 复习日：通讯录从零重写一遍 | — | — |
 
 ### 里程碑
 
@@ -37,8 +59,10 @@ Day 01 ├██████████████░░░░░░░░░�
 - [x] 文件与异常：文件读写 / try-except / JSON / 联网（Day 05–08）
 - [x] 第一个完整项目：菜单版通讯录（Day 09、12）
 - [x] 面向对象：class / self / 双下划线方法 / 继承 / 多态（Day 10–13）
-- [ ] 工程化：多文件拆分、模块化、包（Day 14 进行中）
-- [ ] 综合项目：把通讯录做成带界面的程序
+- [ ] 阶段① 基础收尾：包 / 虚拟环境 / 标准库 / 正则 / 调试（Day 15–20）
+- [ ] 阶段② 从零做项目：能不看教程写出完整程序（Day 21–35）
+- [ ] 阶段③ 求职核心技能：Web 或数据处理 + Git + Linux + 测试（Day 36–60）
+- [ ] 阶段④ 作品集：3 个项目仓库 + 简历（Day 61–90）
 
 ## 运行方法
 
@@ -60,4 +84,5 @@ cd day14 && python main.py
 ```
 day01/  day02/  ...  day14/   # 每天：课堂代码 + 作业 + 程序产生的数据文件
 day14/                        # 多文件示例：contactbook.py（工具箱）+ main.py（入口）
+ROADMAP.md                    # 90 天求职路线图
 ```
