@@ -49,7 +49,9 @@ print("【装了多少库】换个环境这个数字就变")
 print("=" * 48)
 if site:
     infos = glob.glob(os.path.join(site[0], "*.dist-info"))
-    names = sorted(os.path.basename(p).rsplit("-", 1)[0] for p in infos)
+    # 文件夹名长这样：requests-2.34.2.dist-info
+    # removesuffix 砍掉结尾的 .dist-info，剩下的就是“包名-版本号”
+    names = sorted(os.path.basename(p).removesuffix(".dist-info") for p in infos)
     print("  dist-info 文件夹数量 =", len(names), "（每个包对应一个）")
     print("  前 10 个：", names[:10])
 print()
