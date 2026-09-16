@@ -42,7 +42,7 @@ while True:
 
 
 # 笔记
-# 1. json.dump() 将字典写入文件，json.load() 从文件读取字典
+# 1. json.dump() 将字典写入文件，写法为 json.dump(字典, 文件对象, ensure_ascii=False, indent=2)，json.load() 从文件读取字典，写法为 json.load(文件对象)
 # 2. datetime的作用是获取当前日期和时间，random的作用是生成随机数
 # 3. try-except语句用于处理可能出现的异常情况，例如文件不存在时，程序不会崩溃，而是执行except块中的代码
 # 4. len() 函数用于获取字典中键值对的数量

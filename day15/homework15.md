@@ -59,14 +59,14 @@ python -m py_compile mypkg/__init__.py mypkg/storage.py mypkg/book.py mypkg/cli.
 
 ## 验收标准
 
-| 检查 | 期望 |
-| --- | --- |
-| ① | 打印出 `<class 'mypkg.book.ContactBook'>` 和一条 `...contacts15_hw.json` 路径 |
-| ② | 出现 `通讯录（0人）：{}` 和菜单 |
-| ③ | `已加上 光羽` → `电话只能是数字！` → `光羽：111` → `共 1 人，再见！` |
-| ④ | 只打印"干净"，没有多余输出 |
-| ⑤ | 报 `ImportError: attempted relative import with no known parent package`（**这是对的**，说明你用了相对导入） |
-| ⑥ | 没有任何输出（没输出=语法全对） |
+| 检查 | 期望                                                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| ①    | 打印出 `<class 'mypkg.book.ContactBook'>` 和一条 `...contacts15_hw.json` 路径                                |
+| ②    | 出现 `通讯录（0人）：{}` 和菜单                                                                              |
+| ③    | `已加上 光羽` → `电话只能是数字！` → `光羽：111` → `共 1 人，再见！`                                         |
+| ④    | 只打印"干净"，没有多余输出                                                                                   |
+| ⑤    | 报 `ImportError: attempted relative import with no known parent package`（**这是对的**，说明你用了相对导入） |
+| ⑥    | 没有任何输出（没输出=语法全对）                                                                              |
 
 ## 常见坑
 
@@ -75,3 +75,15 @@ python -m py_compile mypkg/__init__.py mypkg/storage.py mypkg/book.py mypkg/cli.
 - `cli.py` 里用了 `import book` → 同样报错，包内互相引用一律用 `.`
 - 忘了 `__init__.py` → 那个文件夹就不是包，`import mypkg` 直接失败
 - 数据文件路径写成相对路径 `"contacts15_hw.json"` → 从别的目录跑时文件会掉到别处（Day7 的老坑）
+
+# 笔记
+
+# 1. 拆分成四个文件，创建成一个包，包能被导入并且拿到类和路径
+
+# 2. 修改book.py文件，使用相对导入，从storage.py文件中导入的是load() / save() 两个函数 + PKG_DIR / PATH 常量
+
+# 3. 修改**init**.py文件，导出的是ContactBook类和PATH常量
+
+# 4. 修改cli.py文件，使用相对导入，导出的是ContactBook类和PATH常量
+
+# 5. 修改storage.py文件，使用相对导入，导出的是load() / save() 两个函数 + PKG_DIR / PATH 常量
