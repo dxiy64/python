@@ -11,7 +11,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).parent
-OUT = HERE / "out_hw"          # 所有产出都丢进这个目录
+OUT = HERE / "out_hw"  # 所有产出都丢进这个目录
 
 CONTACTS = [
     {"姓名": "光羽", "电话": "18486311094", "城市": "东莞"},
@@ -31,7 +31,10 @@ def export_csv(rows, path):
     #         writer.writeheader()          # 写表头
     #         writer.writerows(rows)        # 一次写多行
     #   注意 newline="" 不能省（Windows 上会多出空行），encoding 用 utf-8-sig（Excel 打开不乱码）
-    print(f"[TODO 1 未完成] 应该把 {len(rows)} 行写到 {path.name}")
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["姓名", "电话", "城市"])
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def load_csv(path):
@@ -41,8 +44,8 @@ def load_csv(path):
     #     with path.open("r", encoding="utf-8-sig", newline="") as f:
     #         return list(csv.DictReader(f))
     #   验证：读回来的每行应该是 {'姓名': '光羽', '电话': '...', '城市': '...'}
-    print(f"[TODO 2 未完成] 应该从 {path.name} 读回 {len(CONTACTS)} 行")
-    return []
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
 
 
 def make_report(rows, now):
@@ -59,8 +62,24 @@ def make_report(rows, now):
     #        - 按城市分组：东莞（2人）：光羽、鼠鼠       ← 用 defaultdict(list)
     #        - 电话后 5 位统计：出现最多的 2 个           ← 用 Counter + most_common(2)
     #   提示（写文件一行搞定）：path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("[TODO 3 未完成] 应该生成带时间戳的报表文件")
-    return None
+    path = OUT / f"报表_{now.strftime('%Y%m%d_%H%M%S')}.txt"
+    lines = [
+        f"导出时间：{now.strftime('%Y-%m-%d %H:%M:%S')}",
+        f"共 {len(rows)} 人",
+    ]
+    by_city = defaultdict(list)
+    for r in rows:
+        by_city[r["城市"]].append(r["姓名"])
+    for city, names in by_city.items():
+        # 把by_city.items()中的key(键：城市)和value(值：姓名）列表分别赋值给city和names
+        lines.append(f"{city}（{len(names)}人）：{', '.join(names)}")
+        #', '是分隔符字符串.join(一堆字符串)，把names中的元素用逗号和空格连接起来
+
+    p = Counter([r["电话"][-5:] for r in rows])  # 有疑问
+    lines.append(f"电话后 5 位统计：出现最多的两个： {p.most_common(2)}")
+
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
 
 
 def main():
@@ -87,6 +106,21 @@ def main():
     #   "本次共导出 5 人，覆盖 3 个城市，输出目录 ...\n   "
     #   城市数量可以用 len({r['城市'] for r in rows})（集合推导式，去重）
 
+    print(
+        f"本次共导出 {len(rows)} 人，覆盖 {len({r['城市'] for r in rows})} 个城市，输出目录 {OUT}"
+    )
+
 
 if __name__ == "__main__":
     main()
+
+# 笔记
+# 1. pathlib是Python的内置库，用于处理文件路径。它提供了一种面向对象的方式来操作文件和目录，使得路径操作更加直观和简洁。
+
+# 2. csv是Python的内置库，用于读写CSV文件。它提供了一种简单的方式来处理CSV文件，包括读取和写入数据。
+
+# 3. datetime是Python的内置库，用于处理日期和时间。它提供了一种简单的方式来获取当前日期和时间，以及进行日期和时间的计算和格式化。
+
+# 4. collections是Python的内置库，用于提供一些有用的数据结构。它包括Counter、defaultdict等数据结构，可以方便地处理一些常见的数据操作。
+
+# 5. shutil是Python的内置库，用于提供一些高级的文件操作功能。它包括复制、删除、移动等操作，可以方便地处理文件和目录。

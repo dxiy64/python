@@ -3,16 +3,16 @@
 从零开始的 Python 学习，每天一个主题 + 一份作业。
 **目标：找到 Python 相关工作（90 天计划）**
 
-![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-17%20%2F%2090%20%E5%A4%A9%20(19%25)-orange)
+![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-18%20%2F%2090%20%E5%A4%A9%20(20%25)-orange)
 ![当前阶段](https://img.shields.io/badge/%E9%98%B6%E6%AE%B5%E2%91%A0-%E5%9F%BA%E7%A1%80%E6%94%B6%E5%B0%BE%20Day%2015--20-yellow)
 ![目标](https://img.shields.io/badge/%E7%9B%AE%E6%A0%87-Python%20%E5%B7%A5%E4%BD%9C-blueviolet)
 
 ## 学习进度
 
-**已完成 17 / 90 天（19%）**　🟩 已完成　🟨 进行中　⬜ 未开始
+**已完成 18 / 90 天（20%）**　🟩 已完成　🟨 进行中　⬜ 未开始
 
 ```
-Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
+Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 Day 31–60  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 ```
@@ -21,7 +21,7 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 
 | 阶段 | 天数 | 状态 |
 | --- | --- | --- |
-| ① 基础收尾（包 / 依赖 / 标准库 / 正则 / 调试） | Day 15–20 | 🟨 进行中（Day 17 标准库四件套） |
+| ① 基础收尾（包 / 依赖 / 标准库 / 正则 / 调试） | Day 15–20 | 🟨 进行中（Day 18 正则表达式） |
 | ② 从零做项目（sqlite / 爬虫 / 2 个作品） | Day 21–35 | ⬜ 未开始 |
 | ③ 求职核心技能（Git / Linux / HTTP / Web 或数据 / 测试） | Day 36–60 | ⬜ 未开始 |
 | ④ 作品与求职（3 个作品 / 简历 / 面试） | Day 61–90 | ⬜ 未开始 |
@@ -48,8 +48,8 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 | ✅ | Day 14 | 拆文件：工具箱（类）+ 入口（菜单）、`import` 三种写法、`__pycache__` 与闸门 | `day14/day14.py` | `day14/homework14.md` — 拆分 `big.py` → `hw_contactbook.py` + `hw_main.py`（已验收） |
 | ✅ | Day 15 | 模块与包：`__init__.py` 门面、`from 包.模块 import`、相对导入 `.`、`python -m` | `day15/day15.py` | `day15/homework15.md` — 通讯录改造成 `mypkg/` 包（已验收） |
 | ✅ | Day 16 | 虚拟环境与依赖：`venv` / `pip` / `requirements.txt` / 环境隔离 | `day16/day16.py` + `commands.md` | `day16/homework16.md` — 建 venv、装 `tabulate`、导出并复现依赖（已验收） |
-| 🚧 | Day 17 | 标准库四件套：`pathlib` / `csv` / `datetime` / `collections` | `day17/day17.py` | `day17/homework17.py` — 通讯录导出器：CSV + 时间戳报表 + 分组统计 |
-| ⬜ | Day 18 | 正则表达式 `re` | — | — |
+| ✅ | Day 17 | 标准库四件套：`pathlib` / `csv` / `datetime` / `collections` | `day17/day17.py` | `day17/homework17.py` — 通讯录导出器（CSV + 时间戳报表 + 分组统计，已验收） |
+| 🚧 | Day 18 | 正则表达式 `re`：search / findall / sub / fullmatch / 分组 / 元字符 | `day18/day18.py` | `day18/homework18.py` — 通讯录数据清洗器（抽取/校验/脱敏手机号） |
 | ⬜ | Day 19 | 调试：读 traceback / 断点 / `logging` | — | — |
 | ⬜ | Day 20 | 复习日：通讯录从零重写一遍 | — | — |
 
