@@ -5,16 +5,21 @@
 # 这个文件直接运行不会报错，但 TODO 的功能是缺的——补完再运行验证
 # ============================================
 import re
+import csv
+from pathlib import Path
+
+HERE = Path(__file__).parent
+OUT = HERE / "out_hw18"
 
 # 一堆“脏数据”：格式五花八门
 RAW = [
-    "光羽   138-0000-1111",       # 空格 + 横杠
-    "小明|13912345678|深圳",       # 竖线分隔
-    "Tel: 13700002222",           # 带前缀
-    "鼠鼠 999999999",              # 位数不对
-    "   ",                        # 空白行
-    "阿鬼 0773-1234567",           # 座机，不是手机
-    "光光 138 0000 3333",          # 空格分隔
+    "光羽   138-0000-1111",  # 空格 + 横杠
+    "小明|13912345678|深圳",  # 竖线分隔
+    "Tel: 13700002222",  # 带前缀
+    "鼠鼠 999999999",  # 位数不对
+    "   ",  # 空白行
+    "阿鬼 0773-1234567",  # 座机，不是手机
+    "光光 138 0000 3333",  # 空格分隔
 ]
 
 
@@ -25,8 +30,7 @@ def to_digits(text):
     #         删除 = 替换成空字符串 ''
     #         “非数字”的模式是 \D
     #   验证：to_digits("138-0000-1111") → '13800001111'
-    print("[TODO 1 未完成]")
-    return ""
+    return re.sub(r"\D", "", text)
 
 
 def find_mobile(digits):
@@ -39,8 +43,20 @@ def find_mobile(digits):
     #     return m.group() if m else None
     #   验证：find_mobile("13800001111") → '13800001111'
     #        find_mobile("999999999")   → None
-    print("[TODO 2 未完成]")
-    return None
+
+    # 有问题版⬇
+
+    #    phone = re.search(r"1[3-9]\d{9}", digits)
+    #    if phone:
+    #        digits.append(phone.group())
+    #    else:
+    #        digits.append(None)
+    # digits 现在是函数的参数（一个字符串），而字符串没有 append（那是列表才有的方法），所以不能直接在函数里修改参数的值
+
+    # 修改版⬇
+
+    m = re.search(r"1[3-9]\d{9}", digits)
+    return m.group() if m else None
 
 
 def mask(phone):
@@ -50,8 +66,7 @@ def mask(phone):
     #   替换：\1****\2   （在替换串里用 \1 \2 引用分组）
     #   注意：替换串建议写成 r'\1****\2'（原始字符串）
     #   验证：mask("13800001111") → '138****1111'
-    print("[TODO 3 未完成]")
-    return phone
+    return re.sub(r"(\d{3})\d{4}(\d{4})", r"\1****\2", phone)
 
 
 def is_valid_mobile(s):
@@ -61,8 +76,7 @@ def is_valid_mobile(s):
     #   验证：is_valid_mobile('13800001111') → True
     #        is_valid_mobile('1380000111')  → False
     #        is_valid_mobile('1380000111a') → False
-    print("[TODO 4 未完成]")
-    return False
+    return bool(re.fullmatch(r"1[3-9]\d{9}", s))
 
 
 def clean_all(raw):
@@ -72,8 +86,40 @@ def clean_all(raw):
     #   ② find_mobile 找手机号
     #   ③ 找到就放进 ok 列表；找不到就把原文放进 bad 列表
     #   提示：写一个循环，最后 return ok, bad
-    print("[TODO 5 未完成]")
-    return [], []
+
+    # 有问题原版⬇
+
+    #    for s in RAW:
+    #        to_digits(s)
+    #        if find_mobile(s):
+    #            ok.append(s)
+    #        else:
+    #            bad.append(s)
+
+    # ok / bad 没定义；to_digits 的返回值被丢掉；遍历的是 RAW 不是参数 raw
+
+    # 修正版⬇
+    ok, bad = [], []  # ① 先备两个篮子
+    for line in raw:  # ② 用参数 raw（不是全局 RAW）
+        digits = to_digits(line)  # ③ 接住返回值然后进行to_digits操作
+        phone = find_mobile(digits)
+        if phone:
+            ok.append(phone)  # ④ 存手机号
+        else:
+            bad.append(line)
+    return ok, bad  # ⑤ 交出去
+
+
+def export_csv(ok, bad, out):
+    with out.open("w", encoding="utf8", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["有效", "手机号"])
+        for p in ok:
+            writer.writerow([True, mask(p)])
+        writer.writerow([])
+        writer.writerow(["无效", "原因"])
+        for p in bad:
+            writer.writerow([False, p])
 
 
 if __name__ == "__main__":

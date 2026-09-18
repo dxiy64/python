@@ -29,10 +29,15 @@ print("【演示 2】找：search（第一个）vs findall（全部）")
 print("=" * 52)
 text = "联系人：光羽 13800001111，小明 13912345678，座机 0769-8888888"
 print("  原文：", text)
-print("  re.search(r'1[3-9]\\d{9}', text)      →", re.search(r"1[3-9]\d{9}", text).group())
+print(
+    "  re.search(r'1[3-9]\\d{9}', text)      →", re.search(r"1[3-9]\d{9}", text).group()
+)
 print("  re.findall(r'1[3-9]\\d{9}', text)     →", re.findall(r"1[3-9]\d{9}", text))
 print("  re.findall(r'\\d+', text)             →", re.findall(r"\d+", text))
-print("  re.findall(r'[\\u4e00-\\u9fa5]{2,}', text) →", re.findall(r"[\u4e00-\u9fa5]{2,}", text))
+print(
+    "  re.findall(r'[\\u4e00-\\u9fa5]{2,}', text) →",
+    re.findall(r"[\u4e00-\u9fa5]{2,}", text),
+)
 print()
 
 # ③ sub：替换（脱敏、清洗）
@@ -41,11 +46,18 @@ print("【演示 3】sub：把匹配到的部分换掉（真实项目里的“�
 print("=" * 52)
 p = "13800001111"
 print("  原文：", p)
-print("  中间四位打码 re.sub(r'(\\d{3})\\d{4}(\\d{4})', r'\\1****\\2', p) →",
-      re.sub(r"(\d{3})\d{4}(\d{4})", r"\1****\2", p))
-print("  去掉所有非数字 re.sub(r'\\D', '', '138-0000-1111') →", re.sub(r"\D", "", "138-0000-1111"))
-print("  多个空白合成一个 re.sub(r'\\s+', ' ', '光羽   东莞\\t\\t111') →",
-      repr(re.sub(r"\s+", " ", "光羽   东莞\t\t111")))
+print(
+    "  中间四位打码 re.sub(r'(\\d{3})\\d{4}(\\d{4})', r'\\1****\\2', p) →",
+    re.sub(r"(\d{3})\d{4}(\d{4})", r"\1****\2", p),
+)
+print(
+    "  去掉所有非数字 re.sub(r'\\D', '', '138-0000-1111') →",
+    re.sub(r"\D", "", "138-0000-1111"),
+)
+print(
+    "  多个空白合成一个 re.sub(r'\\s+', ' ', '光羽   东莞\\t\\t111') →",
+    repr(re.sub(r"\s+", " ", "光羽   东莞\t\t111")),
+)
 print()
 
 # ④ fullmatch：校验（整串必须完全符合）
@@ -57,8 +69,12 @@ for s in samples:
     ok = bool(re.fullmatch(r"1[3-9]\d{9}", s))
     print(f"  {s:14} → {ok}")
 print("  ⚠️ 对比 re.match：它只要求“开头匹配”，不管后面有什么")
-print("      re.match(r'\\d+', '123abc')   → 匹配成功！", bool(re.match(r"\d+", "123abc")))
-print("      re.fullmatch(r'\\d+', '123abc') → None      ", re.fullmatch(r"\d+", "123abc"))
+print(
+    "      re.match(r'\\d+', '123abc')   → 匹配成功！", bool(re.match(r"\d+", "123abc"))
+)
+print(
+    "      re.fullmatch(r'\\d+', '123abc') → None      ", re.fullmatch(r"\d+", "123abc")
+)
 print()
 
 # ⑤ 分组 ( )：不只是“匹配到”，还想要里面的部分
@@ -74,7 +90,10 @@ print("  第1组 group(1) →", m.group(1))
 print("  第2组 group(2) →", m.group(2))
 print("  第3组 group(3) →", m.group(3))
 print("  一次拿全部 groups() →", m.groups())
-print("  带名字的分组 (?P<名字>...) →", re.fullmatch(r"(?P<name>.+?)\|(?P<phone>\d+)", "光羽|111").groupdict())
+print(
+    "  带名字的分组 (?P<名字>...) →",
+    re.fullmatch(r"(?P<name>.+?)\|(?P<phone>\d+)", "光羽|111").groupdict(),
+)
 print()
 
 # ⑥ 元字符速查（打印给你抄）
