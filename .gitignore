@@ -33,3 +33,6 @@ wheels/
 # 程序跑出来的产出目录（每次运行都会重建，不进版本库）
 day17/out/
 day17/out_hw/
+day18/out_hw18/
+day19/out/
+day19/out_hw19/

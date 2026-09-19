@@ -111,13 +111,13 @@ def clean_all(raw):
 
 
 def export_csv(ok, bad, out):
-    with out.open("w", encoding="utf8", newline="") as f:
+    with out.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["有效", "手机号"])
         for p in ok:
             writer.writerow([True, mask(p)])
         writer.writerow([])
-        writer.writerow(["无效", "原因"])
+        writer.writerow(["无效", "类型"])
         for p in bad:
             writer.writerow([False, p])
 
@@ -143,4 +143,15 @@ if __name__ == "__main__":
     print("\n=== 脱敏后的报表（进阶做完可以试试）===")
     for p in ok:
         print("   ", mask(p))
+
+    print("\n=== 导出成 CSV 文件 ===")
+    OUT.mkdir(parents=True, exist_ok=True)  # 目录不存在就建（exist_ok 防重复建报错）
+    report = OUT / "清洗结果.csv"  # / 拼路径，Path 对象
+    export_csv(ok, bad, report)  # 把两个篮子交给它写文件
+    print(f"  已写出：{report}")
+    print(f"  共 {len(ok)} 条有效 / {len(bad)} 条无效")
+    print("  文件内容：")
+    print(
+        "   " + report.read_text(encoding="utf-8-sig").replace("\n", "\n   ").rstrip()
+    )
     # 想更像真报表？结合 Day17 的 csv/pathlib，把清洗结果存成文件
