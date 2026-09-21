@@ -24,6 +24,7 @@ class ContactBook:
         try:
             with open(self.path, "r", encoding="utf-8") as f:
                 contacts = json.load(f)
+            return contacts
         except FileNotFoundError:
             return {}
 
@@ -38,7 +39,7 @@ class ContactBook:
         if name in self.contacts:
             print("该联系人已存在")
             return
-        if re.fullmatch(r"1[3-9]\d{9}", phone):
+        if not re.fullmatch(r"1[3-9]\d{9}", phone):
             print("手机号格式不正确")
             return
         self.contacts[name] = phone
@@ -74,8 +75,9 @@ class ContactBook:
         for name, phone in self.contacts.items():
             if keyword in name:
                 print(f"{name}的号码是：{phone}")
-            else:
-                print("没有找到该联系人")
+                break
+        else:
+            print("没有找到该联系人")
 
     def rename(self, old, new):
         if new in self.contacts:
@@ -83,7 +85,6 @@ class ContactBook:
             return
         if old in self.contacts:
             self.contacts[new] = self.contacts.pop(old)
-        del self.contacts[old]
         print(f"{old}重命名为{new}成功")
         self.save()
 
