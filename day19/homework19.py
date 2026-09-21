@@ -57,7 +57,10 @@ def bug_format(text):
 #   提示：func(*args) 里的 * 是「把 args 里装的参数一个个摊开传进去」
 def run_safely(func, *args):
     # ── TODO 1 从这里开始写（大约 6 行）───────────────────────────
-    return "[TODO 1 未完成]"
+    try:
+        return func(*args)
+    except Exception as e:
+        return f"{type(e).__name__}: {str(e)}"
     # ── TODO 1 结束 ──────────────────────────────────────────────
 
 
@@ -66,10 +69,12 @@ def run_safely(func, *args):
 # ----------------------------------------------------------------------
 def find_max(numbers):
     """返回列表里的最大值；空列表返回 None（不许报错）"""
-    best = numbers[0]                   # ← 问题①：空列表在这里就炸
-    for i in range(len(numbers)):       # ← 问题②：下标会算到 len(numbers)（越界）
-        if numbers[i + 1] > best:
-            best = numbers[i + 1]
+    if not numbers:
+        return None
+    best = numbers[0]
+    for n in numbers:
+        if n > best:
+            best = n
     return best
 
 
@@ -83,11 +88,11 @@ def find_max(numbers):
 # C. logging：把清洗过程记进日志
 # ----------------------------------------------------------------------
 RAW = [
-    "光羽   138-0000-1111",      # → 有效 13800001111
-    "小明 12800001111",          # → 会被丢弃：第二位是 2，不在 [3-9] 里
-    "鼠鼠 999999999",            # → 会被丢弃：不是 11 位手机号
-    "   ",                       # → 会被丢弃：空行
-    "阿鬼 13700001111",          # → 有效 13700001111
+    "光羽   138-0000-1111",  # → 有效 13800001111
+    "小明 12800001111",  # → 会被丢弃：第二位是 2，不在 [3-9] 里
+    "鼠鼠 999999999",  # → 会被丢弃：不是 11 位手机号
+    "   ",  # → 会被丢弃：空行
+    "阿鬼 13700001111",  # → 有效 13700001111
 ]
 
 LOG_PATH = OUT / "run.log"
@@ -101,11 +106,11 @@ def clean_rows(rows):
         m = re.search(r"1[3-9]\d{9}", digits)
         if m:
             ok.append(m.group())
-            print(f"[这里应该是 INFO] 第 {i} 行 → {m.group()}")            # ← 换成 logging
+            logging.info(f"第 {i} 行 → {m.group()}")  # ← 换成 logging
         else:
             bad.append(row)
-            print(f"[这里应该是 WARNING] 第 {i} 行抽不到手机号：{row!r}")    # ← 换成 logging
-    print(f"[这里应该是 INFO] 清洗结束：有效 {len(ok)} 条 / 丢弃 {len(bad)} 条")  # ← 换成 logging
+            logging.warning(f"第 {i} 行抽不到手机号：{row!r}")  # ← 换成 logging
+    logging.info(f"清洗结束：有效 {len(ok)} 条 / 丢弃 {len(bad)} 条")  # ← 换成 logging
     return ok, bad
 
 
@@ -125,14 +130,22 @@ def main():
     # 日志配置：现在只写屏幕、且只显示 WARNING 及以上
     # TODO 3：改成 level=INFO，并加上文件 handler（写进 LOG_PATH）
     logging.basicConfig(
-        level=logging.WARNING,
+        level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         datefmt="%H:%M:%S",
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler(LOG_PATH, encoding="utf-8"),
+        ],
+        force=True,
     )
 
     print("=== A. 读错误：三个故障各是什么错 ===")
     print("  bug_divide(10, 0)                 →", run_safely(bug_divide, 10, 0))
-    print("  bug_lookup({'光羽': '111'}, '小明') →", run_safely(bug_lookup, {"光羽": "111"}, "小明"))
+    print(
+        "  bug_lookup({'光羽': '111'}, '小明') →",
+        run_safely(bug_lookup, {"光羽": "111"}, "小明"),
+    )
     print("  bug_format(None)                  →", run_safely(bug_format, None))
 
     print("\n=== B. 修 bug：find_max ===")
@@ -145,7 +158,9 @@ def main():
     print(f"  有效 {len(ok)} 条：", ok)
     print(f"  丢弃 {len(bad)} 条：", bad)
     if LOG_PATH.exists():
-        print(f"  （日志文件 {LOG_PATH.name}：{len(LOG_PATH.read_text(encoding='utf-8').splitlines())} 行）")
+        print(
+            f"  （日志文件 {LOG_PATH.name}：{len(LOG_PATH.read_text(encoding='utf-8').splitlines())} 行）"
+        )
     else:
         print("  （还没有日志文件——TODO 3 的文件 handler 没配好）")
 
