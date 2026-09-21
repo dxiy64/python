@@ -72,7 +72,7 @@ def mask(phone):
 def is_valid_mobile(s):
     """校验是不是合法的手机号（整串完全符合）"""
     # TODO 4（必做）: 用 re.fullmatch 校验。
-    #   注意用 fullmatch 而不是 match（match 只看开头，'1380000111a' 也会通过）
+    #   注意用 fullmatch 而不是 match（match 只看开头，"13800001111abc" 这种也会通过）
     #   验证：is_valid_mobile('13800001111') → True
     #        is_valid_mobile('1380000111')  → False
     #        is_valid_mobile('1380000111a') → False
