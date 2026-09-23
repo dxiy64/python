@@ -1,3 +1,5 @@
+import logging
+
 from pathlib import Path
 from .storage import PATH
 from .book import ContactBook
@@ -12,6 +14,8 @@ def show_menu():
     print("5. 查找联系人(模糊查询)")
     print("6. 重命名联系人")
     print("7. 显示所有联系人")
+    print("8. 导出通讯录")
+    print("9. 统计")
     print("q. 退出")
     print("=" * 40)
 
@@ -55,6 +59,13 @@ def main():
         elif choose == "7":
             print("通讯录名单如下：")
             book.show_all()
+
+        elif choose == "8":
+            print("导出通讯录")
+            book.export()
+
+        elif choose == "9":
+            book.stats()
 
         elif choose not in ["1", "2", "3", "4", "5", "6", "7", "q"]:
             print("输入有误，请重新输入")

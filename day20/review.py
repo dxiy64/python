@@ -18,7 +18,7 @@ class ContactBook:
         return f"通讯录：{self.contacts}"
 
     def __len__(self):
-        return f"当前通讯录总人数：{len(self.contacts)}人"
+        return len(self.contacts)
 
     def load(self):
         try:
