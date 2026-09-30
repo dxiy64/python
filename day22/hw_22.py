@@ -78,7 +78,7 @@ class ContactBook:
 
     def sort_out(self, sort):
         dy = [b for b in self.ledger if b["sort"] == sort]
-        if not dy:   #在这里翻了个错误，if
+        if not dy:
             print("该分类还没有账")
             return
         for record in dy:
