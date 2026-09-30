@@ -75,13 +75,13 @@ class ContactBook:
 
 def show_menu():
 
-    print("=", *40)
+    print("=" * 40)
     print("1. 记一笔")
     print("2. 看流水")
     print("3. 统计")
     print("4. 存读档")
     print("q. 退出")
-    print("=", *40)
+    print("=" * 40)
 
 
 def main():
