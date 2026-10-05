@@ -97,7 +97,7 @@ class ContactBook:
 
         # 23天作业
         if not yd:
-            print("{month}月份还没有账")
+            print(f"{month}月份还没有账")
             return
 
         hj = {}
@@ -123,30 +123,39 @@ class ContactBook:
 
     # 第23天作业
 
-    def delete(self, index, sx):
+    def delete(self, sx):
         if re.fullmatch(r"\d+", sx) is None:
             print("请输入数字")
             return
-        elif sx <= 0:
-            print("请输入大于0的数字")
+        index = int(sx) - 1
+        if not 0 <= index < len(self.ledger):  # 这里是判断索引是否越界
+            print("请输入大于0且在范围内的数字")
             return
-        index = sx - 1
-        del self.ledger[index]
+        print(f"准备删除第{index + 1}笔：{self.ledger[index]}")
+        if input("确定删除吗？(y/n): ").strip().lower() == "y":
+            self.ledger.pop(index)
         self.save()
 
-    def update(self, index, sx, money=None, sort=None, note=None):
-        if re.fullmatch(r"\d+(\.\d{1,2})?", money) is None:
-            print("请输入大于0且最多两位小数的金额")
+    def update(self, sx, money=None, sort=None, note=None):
+        if re.fullmatch(r"\d+", sx) is None:
+            print("请输入数字")
             return
-        money = float(money)
-        if money <= 0:
-            print("金额必须大于0")
+        index = int(sx) - 1
+        if not 0 <= index < len(self.ledger):  # 这里是判断索引是否越界
+            print("没有这一笔")
             return
-        if money is not None:
+        if money is not None and money != "":
+            if re.fullmatch(r"\d+(\.\d{1,2})?", money) is None:
+                print("请输入大于 0 且最多两位小数的金额")
+                return
+            money = float(money)
+            if money <= 0:
+                print("金额必须大于0")
+                return
             self.ledger[index]["money"] = money
-        if sort is not None:
+        if sort is not None and sort != "":
             self.ledger[index]["sort"] = sort
-        if note is not None:
+        if note is not None and note != "":
             self.ledger[index]["note"] = note
         self.save()
 
@@ -203,7 +212,7 @@ def main():
             book.out_csv()
         elif choice == "8":
             sx = input("要删除第几笔：").strip()
-            book.delete()
+            book.delete(sx)
         elif choice == "9":
             sx = input("要修改第几笔：").strip()
             print("提示：如果不修改某一项，请直接回车")

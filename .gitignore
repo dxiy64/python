@@ -38,3 +38,9 @@ day19/out/
 day19/out_hw19/
 day20/out/
 day20/**/out/
+day24/out/
+day25/out/
+
+# sqlite 落盘数据（跑出来的，不是代码）
+day24/ledger.db
+day25/ledger.db

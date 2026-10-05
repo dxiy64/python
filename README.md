@@ -3,13 +3,13 @@
 从零开始的 Python 学习，每天一个主题 + 一份作业。
 **目标：找到 Python 相关工作（90 天计划）**
 
-![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-22%20%2F%2090%20%E5%A4%A9%20(24%25)-orange)
+![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-24%20%2F%2090%20%E5%A4%A9%20(27%25)-orange)
 ![当前阶段](https://img.shields.io/badge/%E9%98%B6%E6%AE%B5%E2%91%A1-%E4%BB%8E%E9%9B%B6%E5%81%9A%E9%A1%B9%E7%9B%AE%20Day%2021--35-yellow)
 ![目标](https://img.shields.io/badge/%E7%9B%AE%E6%A0%87-Python%20%E5%B7%A5%E4%BD%9C-blueviolet)
 
 ## 学习进度
 
-**已完成 22 / 90 天（24%）**　🟩 已完成　🟨 进行中　⬜ 未开始
+**已完成 24 / 90 天（27%）**　🟩 已完成　🟨 进行中　⬜ 未开始
 
 ```
 Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜⬜⬜
@@ -22,7 +22,7 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 | 阶段 | 天数 | 状态 |
 | --- | --- | --- |
 | ① 基础收尾（包 / 依赖 / 标准库 / 正则 / 调试） | Day 15–20 | ✅ 已完成（Day 20 复习日三阶段全部验收） |
-| ② 从零做项目（记账本 / sqlite / 爬虫 / 2 个作品） | Day 21–35 | 🟨 进行中（Day 21–22 记账本已验收；Day 23 记账本收尾：删改 + 断月报表） |
+| ② 从零做项目（记账本 / sqlite / 爬虫 / 2 个作品） | Day 21–35 | 🟨 进行中（Day 21–24 记账本+sqlite增删改查已验收；Day 25 sqlite聚合查询） |
 | ③ 求职核心技能（Git / Linux / HTTP / Web 或数据 / 测试） | Day 36–60 | ⬜ 未开始 |
 | ④ 作品与求职（3 个作品 / 简历 / 面试） | Day 61–90 | ⬜ 未开始 |
 
@@ -53,7 +53,9 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 | ✅ | Day 19 | 调试：读 traceback / `print` 打点 / `breakpoint()`+pdb / `logging` 分级 / `assert` | `day19/day19.py` + `crash_demo.py` + `pdb_demo.py` | `day19/homework19.py` — 调试练习台（读错误名 / 修 bug / logging 落盘，已验收） |
 | ✅ | Day 20 | 复习日：**不看旧文件，从零重写通讯录**（单文件 → 拆包 → 挂上正则/CSV/日志） | `day20/homework20.md` + `day20/复习地图.md` | 你自己的 `day20/review.py` + `day20/mypkg/`（三阶段已验收） |
 | ✅ | Day 22 | 记账本扩展：按分类·日期筛选、月度报表、导出 CSV | `day22/day22.py` | `day22/homework22.md` + `day22/hw_22.py`（已验收：筛选/报表/CSV 落盘） |
-| 🟨 | Day 23 | 记账本收尾：删除·修改一笔、空月报表、跨月验收 | `day23/day23.py` | `day23/homework23.md` — 收尾补齐（进行中） |
+| ✅ | Day 23 | 记账本收尾：删除·修改一笔、空月报表、跨月验收 | `day23/day23.py` | `day23/homework23.md` + `day23/hw_23.py`（已验收：删改/空月/跨月） |
+| ✅ | Day 24 | sqlite3 第一天：建表 / 增删改查（INSERT·SELECT·UPDATE·DELETE） | `day24/day24.py` | `day24/homework24.py` — 记账本搬进 sqlite（已验收） |
+| 🟨 | Day 25 | sqlite3 第二天：聚合查询（SUM·COUNT·GROUP BY） | `day25/day25.py` | `day25/homework25.py` — SQL 版分类统计 + 月度报表（4 个 TODO，进行中） |
 
 ### 里程碑
 
