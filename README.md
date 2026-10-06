@@ -3,16 +3,16 @@
 从零开始的 Python 学习，每天一个主题 + 一份作业。
 **目标：找到 Python 相关工作（90 天计划）**
 
-![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-25%20%2F%2090%20%E5%A4%A9%20(28%25)-orange)
+![进度](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-26%20%2F%2090%20%E5%A4%A9%20(29%25)-orange)
 ![当前阶段](https://img.shields.io/badge/%E9%98%B6%E6%AE%B5%E2%91%A1-%E4%BB%8E%E9%9B%B6%E5%81%9A%E9%A1%B9%E7%9B%AE%20Day%2021--35-yellow)
 ![目标](https://img.shields.io/badge/%E7%9B%AE%E6%A0%87-Python%20%E5%B7%A5%E4%BD%9C-blueviolet)
 
 ## 学习进度
 
-**已完成 25 / 90 天（28%）**　🟩 已完成　🟨 进行中　⬜ 未开始
+**已完成 26 / 90 天（29%）**　🟩 已完成　🟨 进行中　⬜ 未开始
 
 ```
-Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜⬜
+Day 01–30  🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟨⬜⬜⬜⬜
 Day 31–60  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 ```
@@ -22,7 +22,7 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 | 阶段 | 天数 | 状态 |
 | --- | --- | --- |
 | ① 基础收尾（包 / 依赖 / 标准库 / 正则 / 调试） | Day 15–20 | ✅ 已完成（Day 20 复习日三阶段全部验收） |
-| ② 从零做项目（记账本 / sqlite / 爬虫 / 2 个作品） | Day 21–35 | 🟨 进行中（Day 21–25 记账本+sqlite聚合已验收；Day 26 菜单版sqlite记账本） |
+| ② 从零做项目（记账本 / sqlite / 爬虫 / 2 个作品） | Day 21–35 | 🟨 进行中（Day 21–26 记账本+sqlite已验收；Day 27 爬虫抓取解析） |
 | ③ 求职核心技能（Git / Linux / HTTP / Web 或数据 / 测试） | Day 36–60 | ⬜ 未开始 |
 | ④ 作品与求职（3 个作品 / 简历 / 面试） | Day 61–90 | ⬜ 未开始 |
 
@@ -56,7 +56,8 @@ Day 61–90  ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜�
 | ✅ | Day 23 | 记账本收尾：删除·修改一笔、空月报表、跨月验收 | `day23/day23.py` | `day23/homework23.md` + `day23/hw_23.py`（已验收：删改/空月/跨月） |
 | ✅ | Day 24 | sqlite3 第一天：建表 / 增删改查（INSERT·SELECT·UPDATE·DELETE） | `day24/day24.py` | `day24/homework24.py` — 记账本搬进 sqlite（已验收） |
 | ✅ | Day 25 | sqlite3 第二天：聚合查询（SUM·COUNT·GROUP BY） | `day25/day25.py` | `day25/homework25.py` — SQL 版分类统计 + 月度报表（已验收） |
-| 🟨 | Day 26 | sqlite3 第三天：菜单版完整程序 + CSV 导出 | `day26/day26.py` | `day26/homework26.py` — 菜单版 sqlite 记账本（5 个 TODO，进行中） |
+| ✅ | Day 26 | sqlite3 第三天：菜单版完整程序 + CSV 导出 | `day26/day26.py` | `day26/homework26.py` — 菜单版 sqlite 记账本（已验收） |
+| 🟨 | Day 27 | 爬虫第一天：requests 抓网页 + BeautifulSoup 摘内容 | `day27/day27.py` | `day27/homework27.py` — 抓名言存 sqlite（4 个 TODO，进行中） |
 
 ### 里程碑
 
