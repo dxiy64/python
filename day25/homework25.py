@@ -6,6 +6,7 @@
 要求：一次只做一个 TODO，做完就跑一次，看着报错往下走。
 只许用 SQL 聚合（SUM / COUNT / GROUP BY）算数，不许 SELECT 明细回来循环累加。
 """
+
 import sqlite3
 from pathlib import Path
 
@@ -16,11 +17,9 @@ DB = HERE / "ledger.db"
 class LedgerDB:
     def __init__(self, path=DB):
         self.conn = sqlite3.connect(path)
-        self.conn.execute(
-            """CREATE TABLE IF NOT EXISTS ledger(
+        self.conn.execute("""CREATE TABLE IF NOT EXISTS ledger(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                money REAL, sort TEXT, note TEXT, time TEXT)"""
-        )
+                money REAL, sort TEXT, note TEXT, time TEXT)""")
         self.conn.commit()
 
     def add(self, money, sort, note, time):
@@ -32,21 +31,45 @@ class LedgerDB:
 
     def total(self):
         # TODO 1：整表总支出，一句 SELECT SUM，空表回 0（提示：or 0）
-        raise NotImplementedError("TODO 1：总支出")
+        return self.conn.execute("SELECT SUM(money) FROM ledger").fetchone()[0] or 0
 
     def month_total(self, month):
         # TODO 2：某月总支出，WHERE time LIKE month + "%"，空月回 0
-        raise NotImplementedError("TODO 2：月总支出")
+        return (
+            self.conn.execute(
+                "SELECT SUM(money) FROM ledger WHERE time LIKE ?", (month + "%",)
+            ).fetchone()[0]
+            or 0
+        )
 
     def stats_by_sort(self, month=None):
         # TODO 3：按分类统计，返回 {分类: 总额}；给了 month 只算当月
         # 提示：GROUP BY sort；month 为 None 时不加 WHERE
-        raise NotImplementedError("TODO 3：分类统计")
+        if month is None:
+            return dict(
+                self.conn.execute(
+                    "SELECT sort, SUM(money) FROM ledger GROUP BY sort"
+                ).fetchall()
+            )
+        else:
+            return dict(
+                self.conn.execute(
+                    "SELECT sort, SUM(money) FROM ledger WHERE time LIKE ? GROUP BY sort",
+                    (month + "%",),
+                ).fetchall()
+            )
 
     def month_report(self, month):
         # TODO 4：月度报表——空月打印"X 月还没有账"；
         # 有账打印"月份：X，共N笔，总支出：T，各分类：{...}"（N 用 COUNT，T 用 SUM）
-        raise NotImplementedError("TODO 4：月度报表")
+        count, total = self.conn.execute(
+            "SELECT COUNT(*), SUM(money) FROM ledger WHERE time LIKE ?", (month + "%",)
+        ).fetchone()
+        if count == 0:
+            print(f"{month} 月还没有账")
+        else:
+            stats = self.stats_by_sort(month)
+            print(f"月份：{month}，共{count}笔，总支出：{total}，各分类：{stats}")
 
     def close(self):
         self.conn.close()
