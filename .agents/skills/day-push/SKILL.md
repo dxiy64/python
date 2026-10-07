@@ -31,6 +31,19 @@ git ls-remote origin refs/heads/main
 - 中文徽章 URL 必须 percent-encode，提交前 `curl -s -o /dev/null -w "%{http_code}" "<url>"` 确认 200。
 - 规则：README 只写已验收的事实，不写预告（作业没验收前不标 ✅）。
 
+## 技能备份同步（有改动才推）
+
+`python-tutor` 技能住在另一个私有仓（`~/hermes-skills` → GitHub `dxiy64/hermes-skills`），
+平时几乎不变，所以只做条件同步，不空提交：
+
+```bash
+cd ~/hermes-skills && git status --short
+# 有输出才执行下面两行，没输出直接跳过（注意：原生 git 不认 /c/... 路径，
+# 所以先 cd 进去再跑 git，不用 git -C）
+git add -A
+git commit -m "chore: sync python-tutor" && git push origin main
+```
+
 ## 项目约束
 
 - `ledger.json`、`contacts.json` 是学员数据，**跟代码一起提交**。
