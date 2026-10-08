@@ -43,6 +43,7 @@ day25/out/
 day26/out/
 day27/out/
 day28/out/
+day29/out/
 day26/ledger.csv
 
 # sqlite 落盘数据（跑出来的，不是代码）
@@ -51,3 +52,4 @@ day25/ledger.db
 day26/ledger.db
 day27/quotes.db
 day28/quotes.db
+day29/quotes.db

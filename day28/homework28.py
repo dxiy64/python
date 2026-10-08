@@ -7,6 +7,7 @@
 要求：一次只做一个 TODO，做完就跑一次，看着报错往下走。
 fetch / parse / save 的单页写法直接抄你 Day27 的 homework27.py。
 """
+
 import sqlite3
 import time
 import requests
@@ -22,24 +23,55 @@ HEADERS = {"User-Agent": "python-learn/28"}
 def fetch_page(n):
     # TODO 1：抓第 n 页，URL 为 f"{URL}/page/{n}/"，timeout=10 + headers；
     # 200 才 return r.text，否则 return None；RequestException 抓住 return None
-    raise NotImplementedError("TODO 1：抓单页")
+    try:
+        r = requests.get(f"{URL}/page/{n}/", timeout=10, headers=HEADERS)
+        time.sleep(1)
+        rows = BeautifulSoup(r.text, "html.parser").select(".quote")
+        if r.status_code == 200:
+            return r.text if rows else None
+        else:
+            return None
+    except requests.exceptions.RequestException:
+        return None
 
 
 def parse(html):
     # TODO 2：抄 Day27 的 parse（None 回 []，每条 (text, author, tags)）
-    raise NotImplementedError("TODO 2：摘名言")
+    if html is None:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    rows = []
+    for quote in soup.select(".quote"):
+        text = quote.select_one(".text").get_text(strip=True)
+        author = quote.select_one(".author").get_text(strip=True)
+        tags = ",".join([t.get_text(strip=True) for t in quote.select(".tag")])
+        rows.append((text, author, tags))
+    return rows
 
 
 def save(rows, conn):
     # TODO 3：INSERT OR IGNORE 批量入库，返回本批新增笔数（rowcount 累加）
     # 提示：表 quotes(text TEXT PRIMARY KEY, author TEXT, tags TEXT)，调用者负责 commit
-    raise NotImplementedError("TODO 3：增量入库")
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS quotes(text TEXT PRIMARY KEY, author TEXT, tags TEXT)"
+    )
+    added = 0
+    for row in rows:
+        cursor = conn.execute(
+            "INSERT OR IGNORE INTO quotes(text, author, tags) VALUES (?, ?, ?)",
+            row,
+        )
+        added += cursor.rowcount
+    return added
 
 
 def top_authors(conn, n=3):
     # TODO 4：返回 [(作者, 条数), ...] 前 n 名
     # 提示：GROUP BY author + ORDER BY COUNT(*) DESC + LIMIT ?（Day25 的 GROUP BY 回来了）
-    raise NotImplementedError("TODO 4：作者排行")
+    return conn.execute(
+        "SELECT author, COUNT(*) FROM quotes GROUP BY author ORDER BY COUNT(*) DESC LIMIT ?",
+        (n,),
+    ).fetchall()
 
 
 def crawl(pages=3):
