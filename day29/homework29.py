@@ -24,31 +24,19 @@ HEADERS = {"User-Agent": "python-learn/29"}
 def stats(conn):
     # TODO 1：返回 (总数, 作者数)
     # 提示：SELECT COUNT(*) / SELECT COUNT(DISTINCT author)，各 fetchone()[0]
-    conn = sqlite3.connect(DB)
-    conn.execute("CREATE TABLE quotes(text TEXT PRIMARY KEY, author TEXT, tags TEXT)")
-    r = requests.get(f"{URL}/page/1/", timeout=15, headers=HEADERS)
-    for q in BeautifulSoup(r.text, "html.parser").select(".quote"):
-        conn.execute(
-            "INSERT OR IGNORE INTO quotes VALUES (?,?,?)",
-            (
-                q.select_one(".text").get_text(strip=True),
-                q.select_one(".author").get_text(strip=True),
-                "",
-            ),
-        )
-    conn.commit()
+    total = conn.execute("SELECT COUNT(*) FROM quotes").fetchone()[0]
+    authors = conn.execute("SELECT COUNT(DISTINCT author) FROM quotes").fetchone()[0]
+    return total, authors
 
 
 def top_authors(conn, n=3):
     # TODO 2：返回 [(作者, 条数), ...] 前 n 名（抄 Day28）
-    total = conn.execute("SELECT COUNT(*) FROM quotes").fetchone()[0]
-    authors = conn.execute("SELECT COUNT(DISTINCT author) FROM quotes").fetchone()[0]
     top = conn.execute(
         "SELECT author, COUNT(*) FROM quotes GROUP BY author "
         "ORDER BY COUNT(*) DESC LIMIT ?",
         (n,),
     ).fetchall()
-    print(f"  共 {total} 条，{authors} 位作者，最多：{top[0][0]}（{top[0][1]} 条）")
+    return top
 
 
 def write_report(conn):
@@ -56,12 +44,15 @@ def write_report(conn):
     # 内容 3 行起：标题日期行 + "共 X 条，Y 位作者" + Top3 每行"作者：N 条"
     # 提示：OUT.mkdir(parents=True, exist_ok=True)；文件名 strftime("日报_%Y%m%d_%H%M%S.txt")；
     # write_text(encoding="utf-8")；调用 stats 和 top_authors 组装
+    total, authors = stats(conn)
+    top = top_authors(conn)
+    OUT.mkdir(parents=True, exist_ok=True)
     name = datetime.now().strftime("日报_%Y%m%d_%H%M%S.txt")
     path = OUT / name
     path.write_text(
-        f"名言日报\n{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-        f"共 {conn.execute('SELECT COUNT(*) FROM quotes').fetchone()[0]} 条，"
-        f"{conn.execute('SELECT COUNT(DISTINCT author) FROM quotes').fetchone()[0]} 位作者\n",
+        f"日报 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        f"共 {total} 条，{authors} 位作者\n"
+        + "\n".join(f"{author}: {count} 条" for author, count in top),
         encoding="utf-8",
     )
     return path
